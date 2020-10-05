@@ -20,6 +20,8 @@ import PresaleCompletion from './PresaleCompletion';
 import Claimer from './Claimer';
 import { DappMetaData } from 'types';
 
+import BonusRange from './BonusRange';
+
 const defaultWatcher = createWatcher([], {});
 const walletWatcher = createWatcher([], {});
 
@@ -303,7 +305,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           </Text>
         </>
       )}
-      {isActive && isEnded && !isPaused && (
+      {isActive && !isEnded && !isPaused && (
         <Claimer
           lidPresaleSC={lidPresaleSC}
           address={address}
@@ -317,7 +319,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
           accountClaimedTokens={accountClaimedTokens}
         />
       )}
-      {isActive && !isEnded && !isPaused && (
+      {isActive && isEnded && !isPaused && (
         <>
           {endTime !== 0 && (
             <EndTimer
@@ -339,6 +341,7 @@ const MainApp: React.FC<IMainApp> = ({ address, web3, onConnect, meta }) => {
             currentPrice={currentPrice}
             hardcap={hardcap}
           />
+          <BonusRange />
         </>
       )}
       {!isActive && !isEnded && !isPaused && (
